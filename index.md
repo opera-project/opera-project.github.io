@@ -1,37 +1,20 @@
-## Welcome to GitHub Pages
+# Documentation for opera project
 
-You can use the [editor on GitHub](https://github.com/opera-project/opera-project.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+Opéra project is a simple cms that use symfony4 and community bundles to help u build beautiful pages based on contents and blocks layout
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## The core bundles
 
-### Markdown
+- OperaCoreBundle : The main bundle to build pages mechanism
+- OperaAdminBundle : The admin based on easy admin
+- OperaTextBlockBundle : The first block
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## How to setup
 
-```markdown
-Syntax highlighted code block
+TODO for the moment u can clone the sample https://github.com/opera-project/opera-cms
 
-# Header 1
-## Header 2
-### Header 3
+## How to create a new kind of block
 
-- Bulleted
-- List
+Run the symfony command : `bin/console make:block sample` (write name of block in lower case)
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/opera-project/opera-project.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+This will generate the service block
+And the twig template sample 
