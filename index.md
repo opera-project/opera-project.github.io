@@ -18,3 +18,9 @@ Run the symfony command : `bin/console make:block sample` (write name of block i
 
 This will generate the service block
 And the twig template sample 
+
+In the service u have to implements :
+
+- `getVariables() : array` to return the twig variables needed for template
+- `getType() : string` the type of block for db stored name
+- `createAdminConfigurationForm(FormBuilderInterface $builder)` the configurable part of your bundle
