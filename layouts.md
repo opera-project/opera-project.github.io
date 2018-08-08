@@ -78,5 +78,5 @@ The twig function `cms_area(area_name, ?page)` will show the list of blocks atta
 {% endraw %}
 `````
 
-You can also directly show all elements of page object. But for title, or other if u want, we recommand to u use the `cms_render` function this call will enable your user to save twig template inside of the page to render elements that depends of PageController context. Eg the title of the current article we will save in database `$page->setTitle('{{ article.title }}');` and this will render the article title.
+You can also directly show all elements of page object. But for title, or other if u want, we recommand to u use the `cms_render` function this call will enable your user to save twig template inside of the page to render elements that depends of PageController context. Eg the title of the current article we will save in database `{% raw %}$page->setTitle('{{ article.title }}');{% endraw %}` and this will render the article title.
 
