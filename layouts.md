@@ -41,7 +41,8 @@ After you have to configure the layout representation using this letters. The sy
 
 ## The template
 
-````` 
+`````twig
+{% raw %}
 {% extends 'base.html.twig' %}
 
 {% block body %}
@@ -52,11 +53,13 @@ After you have to configure the layout representation using this letters. The sy
     {{ cms_area('body', page) }}
 
 {% endblock %}
+{% endraw %}
 `````
 
 The twig function `cms_area(area_name, ?page)` will show the list of blocks attached to the given area name. If page is not given it will call the area for `_global` page usefull for common elements like menu for example.
 
-````` 
+`````
+{% raw %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -72,6 +75,7 @@ The twig function `cms_area(area_name, ?page)` will show the list of blocks atta
         {% block javascripts %}{% endblock %}
     </body>
 </html>
+{% endraw %}
 `````
 
 You can also directly show all elements of page object. But for title, or other if u want, we recommand to u use the `cms_render` function this call will enable your user to save twig template inside of the page to render elements that depends of PageController context. Eg the title of the current article we will save in database `$page->setTitle('{{ article.title }}');` and this will render the article title.
