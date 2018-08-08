@@ -58,7 +58,7 @@ After you have to configure the layout representation using this letters. The sy
 
 The twig function `cms_area(area_name, ?page)` will show the list of blocks attached to the given area name. If page is not given it will call the area for `_global` page usefull for common elements like menu for example.
 
-`````
+`````twig
 {% raw %}
 <!DOCTYPE html>
 <html>

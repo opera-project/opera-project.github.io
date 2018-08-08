@@ -19,6 +19,8 @@ composer require opera-project/text-block-bundle
 
 ````
 composer require friendsofsymfony/ckeditor-bundle
+php bin/console ckeditor:install
+php bin/console assets:install public
 ````
 
 ## And after ?
