@@ -4,7 +4,6 @@
 
 layout: doc
 title: OperaTextBlockBundle
-toc: true
 body_class: body-pink
 ---
 

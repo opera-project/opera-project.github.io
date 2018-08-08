@@ -4,7 +4,6 @@
 
 layout: doc
 title: Quick Setup
-toc: true
 body_class: body-green
 ---
 

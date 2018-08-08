@@ -4,7 +4,6 @@
 
 layout: home
 title: Documentation for opera project
-toc: false
 ---
 
 
