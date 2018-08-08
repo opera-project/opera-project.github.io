@@ -75,7 +75,7 @@
                 <div class="doc-body row">
                     <div class="doc-content col-md-9 col-12 order-1">
                         <div class="content-inner">
-                            {{ content | inject_anchors }}
+                           {{ content }}
 
                         </div>
                         <!--//content-inner-->
@@ -85,7 +85,7 @@
                         <div id="doc-nav" class="doc-nav">
         
                             <nav id="doc-menu" class="nav doc-menu flex-column sticky">
-                                {{ content | toc_only }}
+                                <ul class="toc"></ul>
                             </nav>
                             <!--//doc-menu-->
         
@@ -111,8 +111,20 @@
         ga('send', 'pageview');
     </script> {% endif %}
 
+
+
     <!-- Main Javascript -->
     <script type="text/javascript" src="{{ 'plugins/jquery-3.3.1.min.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+    <script type="text/javascript" src="{{ '/js/jquery.tableofcontents.min.js' | relative_url }}" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.toc').tableOfContents($('.doc-content')[0], { startLevel: 2 });
+            var firstH1 = $('.doc-content h1');
+            if (firstH1.length) {
+                $('.toc').insertAfter(firstH1);
+            }
+        });
+    </script>
     <script type="text/javascript" src="{{ 'plugins/bootstrap/js/bootstrap.min.js?v=' | append: site.github.build_revision | relative_url }}"></script>
     <script type="text/javascript" src="{{ 'plugins/stickyfill/dist/stickyfill.min.js?v=' | append: site.github.build_revision | relative_url }}"></script>
     <script type="text/javascript" src="{{ 'js/main.js?v=' | append: site.github.build_revision | relative_url }}"></script>

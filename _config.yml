@@ -31,14 +31,9 @@ markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-toc
 
 sass:
   style: compact
-
-toc:
-  min_level: 2 # default: 1
-  max_level: 5 # default: 6
   
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

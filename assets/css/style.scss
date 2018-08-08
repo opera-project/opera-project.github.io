@@ -48,3 +48,29 @@ $github: #444;
 @import "base";
 @import "doc";
 @import "landing";
+
+
+
+ul.toc {
+    float: right;
+    margin-left: 25px;
+    margin-bottom: 25px;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+ul.toc li,
+ul.toc li li {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+ul.toc a,
+ul.toc a:link {
+    text-decoration: none;
+}
+
+ul.toc a:hover {
+    text-decoration: underline;
+}
