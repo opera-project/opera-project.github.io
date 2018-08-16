@@ -7,7 +7,7 @@ title: OperaTextBlockBundle
 body_class: body-pink
 ---
 
-This bundle `OperaTextBlockBundle` will help you to easily manage static texts usefull to add some js, static content like ads, or image... 
+This bundle [OperaTextBlockBundle](https://github.com/opera-project/OperaTextBlockBundle){:target="_blank"} will help you to easily manage static texts usefull to add some js, static content like ads, or image... 
 
 ## Installation
 

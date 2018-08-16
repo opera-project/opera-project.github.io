@@ -7,7 +7,7 @@ title: OperaListBlockBundle
 body_class: body-pink
 ---
 
-The bundle `OperaListBlockBundle` provide a easy way to manage list of entities for opera-project cms:
+The bundle [OperaListBlockBundle](https://github.com/opera-project/OperaListBlockBundle){:target="_blank"} provide a easy way to manage list of entities for opera-project cms:
 - a new type of Block `ContentList` that gives the possibility of having block of listed entities.
 - an interface `BlockListableInterface` to implements on your listable entities
 
@@ -28,6 +28,20 @@ Presently, the `ContentList` Block configuration can configure thoses parameters
 
 ## How to make an entity listable
 
+### Tag entities
+
+Add to your configuration file theses lines. It will tag your futures entities that implements `BlockListableInterface` as listable.
+
+```yaml
+# config.yaml
+services:
+    _instanceof:
+        Opera\ListBlockBundle\BlockType\BlockListableInterface:
+            tags: ['cms.block_listable']
+```
+
+### Implements BlockListableInterface
+
 To make your entity listable and usable by the `ContentList` Block you must implements `BlockListableInterface`.
 `BlockListableInterface` has two method to implements `listableConfiguration()` and `filterForListableBlock()`
 
@@ -47,19 +61,7 @@ class MyNewListableClass implements BlockListableInterface
 
 ```
 
-### Tag entities
-
-Add to your configuration file theses lines. It will tag your futures entities that implements `BlockListableInterface` as listable.
-
-```yaml
-# config.yaml
-services:
-    _instanceof:
-        Opera\ListBlockBundle\BlockType\BlockListableInterface:
-            tags: ['cms.block_listable']
-```
-
-### The listableConfiguration method
+#### The listableConfiguration method
 
 `listableConfiguration()` must returns an array that will be used in the admin to configure the available **templates** and available **orders** that can be used on your specific entity.
 
@@ -85,7 +87,7 @@ public function listableConfiguration() : array
 }
 ```
 
-### The filterForListableBlock method
+#### The filterForListableBlock method
 
 `filterForListableBlock()` must returns an array of the listable entity filtered by the chosen configuration in the admin.
 
@@ -124,7 +126,7 @@ public function filterForListableBlock(Block $block) : array
 }
 ```
 
-### Create your templates
+#### Create your templates
 
 The array of entities filtered accordingly to the block configuration is stored in `contents` variable
 
