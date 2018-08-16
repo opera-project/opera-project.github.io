@@ -7,7 +7,7 @@ title: OperaTextBlockBundle
 body_class: body-pink
 ---
 
-This bundle `OperaTextBlockBundle` will help u to easylly manage static texts usefull to add some js, static content like ads, or image... 
+This bundle `OperaTextBlockBundle` will help you to easily manage static texts usefull to add some js, static content like ads, or image... 
 
 ## Installation
 
@@ -25,4 +25,4 @@ php bin/console assets:install public
 
 ## And after ?
 
-Thats all refresh your admin and u will see the text block is ready to use !!
+Thats all refresh your admin and you will see the text block is ready to use !!

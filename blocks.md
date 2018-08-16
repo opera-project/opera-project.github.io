@@ -12,9 +12,9 @@ body_class: body-pink
 
 Run the symfony command : `bin/console make:block sample` (write name of block in lower case)
 
-This will generate the service block And the twig template sample
+This will generate the service block and the twig template sample
 
-In the service u have to implements :
+In the service you have to implements :
 
 - `getVariables(Block $block)` : array to return the twig variables needed for template
 - `getType()` : string the type of block for db stored name
@@ -33,10 +33,10 @@ public function getVariables(Block $block) : array
 }
 ````
 
-The `$block` is automatically also passed inside your template to give u the way to get the current block instance. 
+The `$block` is automatically also passed inside your template to give you the way to get the current block instance. 
 
 
-With the given example in your twig u can use
+With the given example in your twig you can use
 
 ```` twig
 dump(article) - To get the article
@@ -56,7 +56,7 @@ public function getType() : string
 
 ### The createAdminConfigurationForm(FormBuilderInterface $builder)
 
-Sometime, your block require configuration, that means it does not just use the request context but for example have to be filtered on one category. So to build your `getVariables` u need to get some user defined configuration.
+Sometime, your block require configuration, that means it does not just use the request context but for example have to be filtered on one category. So to build your `getVariables` you need to get some user defined configuration.
 
 To do that, just configure the admin form with :
 
@@ -69,7 +69,7 @@ public function createAdminConfigurationForm(FormBuilderInterface $builder)
 }
 ````
 
-U can use all of the symfony [form types](https://symfony.com/doc/current/forms.html) and all of this configuration will be persisted inside `$block->getConfiguration()`
+You can use all of the symfony [form types](https://symfony.com/doc/current/forms.html) and all of this configuration will be persisted inside `$block->getConfiguration()`
 
 ## Define a custom template 
 
@@ -77,7 +77,7 @@ By default the getTemplate return `sprintf('blocks/%s.html.twig', $this->getType
 
 Just override : `getTemplate(Block $block)`
 
-For exemple if u want a template that depend of configuration :
+For exemple if you want a template that depend of configuration :
 
 ```` php
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
