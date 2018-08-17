@@ -98,7 +98,7 @@ By default the getTemplate return `sprintf('blocks/%s.html.twig', $this->getType
 
 Just override : `getTemplate(Block $block)`
 
-For exemple if you want a template that depend of configuration :
+For example if you want a template that depend of configuration :
 
 ```` php
 use Symfony\Component\Form\FormBuilderInterface;

@@ -27,7 +27,7 @@ The OperaMediaBundle use [KnpGaufretteBundle](https://github.com/KnpLabs/KnpGauf
 You must configure your adapters and filesystems that will be used.
 
 ```yaml
-# exemple
+# example
 knp_gaufrette:
     stream_wrapper: ~
     adapters:

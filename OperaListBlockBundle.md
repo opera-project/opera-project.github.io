@@ -25,6 +25,7 @@ Presently, the `ContentList` Block configuration can configure thoses parameters
 - `template` : which twig template to use
 - `order` : which order to display the listable entities
 - `limit` : how many entities to display
+- `tags` : filter by taxonomy (See [OperaTaxonomyBundle](OperaTaxonomyBundle))
 
 ## How to make an entity listable
 
@@ -119,6 +120,12 @@ public function filterForListableBlock(Block $block) : array
             default:
                 break;
         }
+    }
+
+    if (isset($blockConfig['tags'])) {
+        $qb->innerJoin('a.tags', 't')
+            ->andWhere('t.id IN (:tags)')
+            ->setParameter('tags', $blockConfig['tags']);
     }
 
     if (isset($blockConfig['limit'])) {
