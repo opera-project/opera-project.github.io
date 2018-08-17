@@ -78,6 +78,14 @@ There is two media form type used for the media picker:
 
 Both use a custom widget design to show the MediaManager.
 
+```php
+use Opera\MediaBundle\Form\MediaEntityType;
+use Opera\MediaBundle\Form\MediaTextType;
+
+$builder->add('path', MediaTextType::class);
+$builder->add('media', MediaEntityType::class);
+```
+
 ## Add Media Picker plugin to CKEDITOR
 
 To add a button in your CKEditor to open a MediaPicker to insert a image you must add the `opera_media_picker` plugin in your plugins list and used config:

@@ -46,7 +46,10 @@ To make your entity listable and usable by the `ContentList` Block you must impl
 `BlockListableInterface` has two method to implements `listableConfiguration()` and `filterForListableBlock()`
 
 ```php
-class MyNewListableClass implements BlockListableInterface
+
+namespace App\Repository;
+
+class MyNewListableRepository implements BlockListableInterface
 {
     public function listableConfiguration(): array 
     {
