@@ -19,6 +19,8 @@ In the service you have to implements :
 - `getVariables(Block $block)` : array to return the twig variables needed for template
 - `getType()` : string the type of block for db stored name
 - `createAdminConfigurationForm(FormBuilderInterface $builder)` the configurable part of your bundle
+- `configure(NodeDefinition $rootNode)` to configure the configuration of your block
+
 
 ### The getVariables method
 
@@ -62,6 +64,7 @@ To do that, just configure the admin form with :
 
 ```` php
 use Opera\CoreBundle\Form\Type\CkEditorOrTextareaType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 public function createAdminConfigurationForm(FormBuilderInterface $builder)
 {
@@ -71,6 +74,24 @@ public function createAdminConfigurationForm(FormBuilderInterface $builder)
 
 You can use all of the symfony [form types](https://symfony.com/doc/current/forms.html) and all of this configuration will be persisted inside `$block->getConfiguration()`
 
+### The configure(NodeDefinition $rootNode) method
+
+You can configure the configuration of your block so that some default values of your block config are set.
+
+```php
+use Symfony\Component\Config\Definition\Builder\NodeDefinition;
+
+public function configure(NodeDefinition $rootNode)
+{
+    /**
+     * We set 'Lorem ipsum' as default value for the 'text' admin configuration form
+     */
+    $rootNode
+        ->children()
+            ->scalarNode('text')->defaultValue('Lorem ipsum')->end()
+        ->end();
+}
+```
 ## Define a custom template 
 
 By default the getTemplate return `sprintf('blocks/%s.html.twig', $this->getType());` so the template is something like `templates/blocks/article.html.twig`
@@ -80,7 +101,9 @@ Just override : `getTemplate(Block $block)`
 For exemple if you want a template that depend of configuration :
 
 ```` php
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Opera\CoreBundle\Entity\Block;
 
 public function createAdminConfigurationForm(FormBuilderInterface $builder)
 {
