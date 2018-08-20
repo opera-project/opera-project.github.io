@@ -101,3 +101,17 @@ fos_ck_editor:
         opera:
             extraPlugins: "opera_media_picker"
 ```
+
+## Add The Media Picker to an easy admin entity form
+
+If you have a Article Entity that have a relation to the Media class from OperaAdminBundle, you can use `Opera\MediaBundle\Form\MediaEntityType` for the media type to have the media picker instead of a simple text select
+
+```yaml
+    entities:
+        Article:
+            class: App\Entity\Article # Add 'Article' class to easy admin entities
+            form:
+                fields: # customise the shown fields
+                    # [...] all your other fields
+                    - { property: image, type: Opera\MediaBundle\Form\MediaEntityType }
+```

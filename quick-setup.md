@@ -50,15 +50,15 @@ The admin will be available on [http://localhost:8000/admin](http://localhost:80
 
 **This skeleton contains these bundles:**
 
-- [OperaTextBlockBundle](/OperaTextBlockBundle){:target="_blank"} (Manage block of text, script, static contents)
-- [OperaListBlockBundle](OperaListBlockBundle){:target="_blank"} (Manage block of list of content)
-- [OperaMediaBundle](OperaMediaBundle){:target="_blank"} (Manage media, upload files)
-- [OperaTaxonomyBundle](OperaTaxonomyBundle){:target="_blank"} (Manage tags)
+- [OperaTextBlockBundle](/OperaTextBlockBundle) (Manage block of text, script, static contents)
+- [OperaListBlockBundle](OperaListBlockBundle) (Manage block of list of content)
+- [OperaMediaBundle](OperaMediaBundle) (Manage media, upload files)
+- [OperaTaxonomyBundle](OperaTaxonomyBundle) (Manage tags)
 
 You can now:
-- [create your own entities](/entities){:target="_blank"} (There is already a `Post` Entity as an exemple)
-- [implement a layout](/layouts){:target="_blank"} for your website
-- [create your own block](/blocks){:target="_blank"}
+- [create your own entities](/entities) (There is already a `Post` Entity as an exemple)
+- [implement a layout](/layouts) for your website
+- [create your own block](/blocks)
 
 ### Things to know
 
