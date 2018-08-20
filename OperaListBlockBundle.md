@@ -50,7 +50,9 @@ To make your entity listable and usable by the `ContentList` Block you must impl
 
 namespace App\Repository;
 
-class MyNewListableRepository implements BlockListableInterface
+use Opera\ListBlockBundle\BlockType\BlockListableInterface;
+
+class MyNewListableRepository extends ServiceEntityRepository implements BlockListableInterface
 {
     public function listableConfiguration(): array 
     {
@@ -96,6 +98,8 @@ public function listableConfiguration() : array
 `filterForListableBlock()` must returns an array of the listable entity filtered by the chosen configuration in the admin.
 
 ```php
+use Opera\CoreBundle\Entity\Block;
+
 public function filterForListableBlock(Block $block) : array 
 {
     /**
@@ -145,6 +149,7 @@ The array of entities filtered accordingly to the block configuration is stored 
     {% for item in contents %}
         {{ item.title }}
         {{ item.text }}
+        {{ dump(concert) }}
     {% endfor %}
 {% endraw %}
 ```

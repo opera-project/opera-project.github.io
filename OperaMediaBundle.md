@@ -27,7 +27,7 @@ The OperaMediaBundle use [KnpGaufretteBundle](https://github.com/KnpLabs/KnpGauf
 You must configure your adapters and filesystems that will be used.
 
 ```yaml
-# example
+# example in a config.yaml file
 knp_gaufrette:
     stream_wrapper: ~
     adapters:
@@ -85,8 +85,9 @@ use Opera\MediaBundle\Form\MediaTextType;
 $builder->add('path', MediaTextType::class);
 $builder->add('media', MediaEntityType::class);
 ```
+## Media Picker
 
-## Add Media Picker plugin to CKEDITOR
+### Add Media Picker plugin to CKEDITOR
 
 To add a button in your CKEditor to open a MediaPicker to insert a image you must add the `opera_media_picker` plugin in your plugins list and used config:
 
@@ -102,7 +103,7 @@ fos_ck_editor:
             extraPlugins: "opera_media_picker"
 ```
 
-## Add The Media Picker to an easy admin entity form
+### Add The Media Picker to an easy admin entity form
 
 If you have a Article Entity that have a relation to the Media class from OperaAdminBundle, you can use `Opera\MediaBundle\Form\MediaEntityType` for the media type to have the media picker instead of a simple text select
 
@@ -115,3 +116,15 @@ If you have a Article Entity that have a relation to the Media class from OperaA
                     # [...] all your other fields
                     - { property: image, type: Opera\MediaBundle\Form\MediaEntityType }
 ```
+
+## Show your image in twig
+
+```twig
+{% raw %}
+    {% if media %}
+        <img src="{{ asset(media.path) | imagine_filter('opera_thumbnail') }}" />
+    {% endif %}
+{% endraw %}
+```
+
+inside `imagine_filter()` choose which resize of the image you want to use.  The list of available filter is configured under `filter_sets` parameters of `liip_imagine`.
