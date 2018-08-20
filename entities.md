@@ -68,6 +68,22 @@ This will create a `Entity/Article.php` and `Repository/ArticleRepository.php`
 ## Update the database schema
 `./bin/console database:schema:update --force`
 
+## __toString magic function
+
+add to your `Article` class a `__toString()` function.
+
+```php
+class Article
+{
+ // [...] all generated code by make:entity
+
+    public function __toString(): string
+    {
+        return $this->getTitle();
+    }
+}
+```
+
 ## Add your entity to easy admin
 
 ```yaml

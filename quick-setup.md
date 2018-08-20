@@ -56,7 +56,7 @@ The admin will be available on [http://localhost:8000/admin](http://localhost:80
 - [OperaTaxonomyBundle](OperaTaxonomyBundle) (Manage tags)
 
 You can now:
-- [create your own entities](/entities) (There is already a `Post` Entity as an exemple)
+- [create your own entities](/entities)
 - [implement a layout](/layouts) for your website
 - [create your own block](/blocks)
 
