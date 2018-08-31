@@ -11,6 +11,16 @@ body_class: body-green
 
 The easyiest way to try playing is clone the sample project here `https://github.com/opera-project/opera-cms`
 
+add the opera pages to your routing file `config/routes.yaml`
+```
+_opera_page:
+  path: /{_opera_page_path}
+  defaults:
+      _opera_page_path: /
+  requirements:
+      _opera_page_path: .+
+```
+
 ---
 ## From composer with flex
 

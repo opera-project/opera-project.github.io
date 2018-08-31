@@ -50,11 +50,11 @@ After you have to configure the layout representation using this letters. The sy
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ cms_area('header', page) }}
+    {{ cms_area('header', _opera_page) }}
     {{ cms_area('header') }}
 
     <hr />
-    {{ cms_area('body', page) }}
+    {{ cms_area('body', _opera_page) }}
 
 {% endblock %}
 {% endraw %}
@@ -76,9 +76,9 @@ The global page have all the commons block that are used on all the page (menu, 
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}{{ cms_render(page.title) }}{% endblock %}</title>
-        <meta name="description" content="{{ page.metaDescription }}" />
-        <meta name="keywords" content="{{ page.metaKeyword }}" />
+        <title>{% block title %}{{ cms_render(_opera_page.title) }}{% endblock %}</title>
+        <meta name="description" content="{{ _opera_page.metaDescription }}" />
+        <meta name="keywords" content="{{ _opera_page.metaKeyword }}" />
 
         {% block stylesheets %}{% endblock %}
     </head>

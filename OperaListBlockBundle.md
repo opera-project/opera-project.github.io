@@ -51,6 +51,7 @@ To make your entity listable and usable by the `ContentList` Block you must impl
 namespace App\Repository;
 
 use Opera\ListBlockBundle\BlockType\BlockListableInterface;
+use Doctrine\ORM\QueryBuilder;
 
 class MyNewListableRepository extends ServiceEntityRepository implements BlockListableInterface
 {
@@ -59,7 +60,7 @@ class MyNewListableRepository extends ServiceEntityRepository implements BlockLi
         // todo implements
     }
 
-    public function filterForListableBlock(Block $block): array
+    public function filterForListableBlock(Block $block): QueryBuilder
     { 
         // todo implements
     }
@@ -95,12 +96,13 @@ public function listableConfiguration() : array
 
 #### The filterForListableBlock method
 
-`filterForListableBlock()` must returns an array of the listable entity filtered by the chosen configuration in the admin.
+`filterForListableBlock()` must returns the query of the listable entity filtered by the chosen configuration in the admin.
 
 ```php
 use Opera\CoreBundle\Entity\Block;
+use Doctrine\ORM\QueryBuilder;
 
-public function filterForListableBlock(Block $block) : array 
+public function filterForListableBlock(Block $block) : QueryBuilder 
 {
     /**
      * $blockConfig['order'] and $blockConfig['limit'] will have the order and limit
@@ -132,25 +134,23 @@ public function filterForListableBlock(Block $block) : array
             ->setParameter('tags', $blockConfig['tags']);
     }
 
-    if (isset($blockConfig['limit'])) {
-        $qb->setMaxResults($blockConfig['limit']);
-    }
-
-    return $qb->getQuery()->getResult();
+    return $qb;
 }
 ```
 
 #### Create your templates
 
 The array of entities filtered accordingly to the block configuration is stored in `contents` variable
+For pagination, see PagerFantaBundle [documentation](https://github.com/whiteoctober/WhiteOctoberPagerfantaBundle)
 
 ```twig
 {% raw %}
     {% for item in contents %}
         {{ item.title }}
         {{ item.text }}
-        {{ dump(concert) }}
     {% endfor %}
+
+    {{ pagerfanta(contents, 'default', {pageParameter: '[' ~ page_parameter_name ~ ']'}) }}
 {% endraw %}
 ```
 
