@@ -14,7 +14,7 @@ The easyiest way to try playing is clone the sample project here `https://github
 add the opera pages to your routing file `config/routes.yaml`
 ```
 _opera_page:
-  path: /{_opera_page_path}
+  path: /{_opera_page_path}/
   defaults:
       _opera_page_path: /
   requirements:
