@@ -117,7 +117,9 @@ If you have a Article Entity that have a relation to the Media class from OperaA
                     - { property: image, type: Opera\MediaBundle\Form\MediaEntityType }
 ```
 
-## Show your image in twig
+## Show your media in twig
+
+### Show your images
 
 ```twig
 {% raw %}
@@ -128,3 +130,62 @@ If you have a Article Entity that have a relation to the Media class from OperaA
 ```
 
 inside `imagine_filter()` choose which resize of the image you want to use.  The list of available filter is configured under `filter_sets` parameters of `liip_imagine`.
+
+### Display your videos/audios sound in twig
+
+Create a route in your controller that gives the content of the media:
+
+```php
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Opera\MediaBundle\Entity\Media;
+
+// in your controller
+
+    /**
+     * @Route("/my_media_route_exemple/{media}", options={"expose"=true}, name="my_media_route_exemple")
+     */
+    public function media(Media $media)
+    {
+        $response = new Response();
+                
+        if (!$media || !$sourceManager->hasSource($media->getSource()) {
+            return $response->setStatusCode(Response::HTTP_BAD_REQUEST);
+        }
+
+        $source = $sourceManager->getSource($media->getSource());
+        $content = $source->read($media);
+
+        $response->headers->set('Content-Type', $media->getMime());
+        $response->headers->set('Expires', '0');
+        $response->headers->set('Cache-Control', "must-revalidate");
+        $response->headers->set('Pragma', 'public');
+        $response->headers->set('Content-Length', $source->size($media));
+
+        $response->setContent($content);
+
+        return $response->send();
+    }
+```
+
+Use this route as video and audio source:
+
+```twig
+{% raw %}
+<!-- video -->
+<video width="600" height="400" controls>
+        <source src="/my_media_route_exemple/{{videoMediaId}}" type="video/mp4">
+        <source src="/my_media_route_exemple/{{videoMediaId}}" type="video/ogg">
+        <source src="/my_media_route_exemple/{{videoMediaId}}" type="video/webm">
+    Your browser does not support the video tag.
+</video>
+
+<!-- sound -->
+<audio controls>
+    <source src="/my_media_route_exemple/{{soundMediaId}}" type="audio/ogg">
+    <source src="/my_media_route_exemple/{{soundMediaId}}" type="audio/mpeg">
+    <source src="/my_media_route_exemple/{{soundMediaId}}" type="audio/wav">
+    Your browser does not support the audio tag.
+</audio>
+{% endraw %}
+```
