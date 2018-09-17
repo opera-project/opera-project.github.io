@@ -16,18 +16,18 @@ This will generate the service block and the twig template sample
 
 In the service you have to implements :
 
-- `getVariables(Block $block)` : array to return the twig variables needed for template
+- `execute(Block $block)` : array to return the twig variables needed for template this is the block controller
 - `getType()` : string the type of block for db stored name
 - `createAdminConfigurationForm(FormBuilderInterface $builder)` the configurable part of your bundle
 - `configure(NodeDefinition $rootNode)` to configure the configuration of your block
 
 
-### The getVariables method
+### The execute method
 
-The getVariables define the variables that can be used in the template.
+The execute method define the variables that can be used in the template. You can use this as a Controller
 
 ```` php
-public function getVariables(Block $block) : array
+public function execute(Block $block) : array
 {
     return [
         'article' => $this->requestStack->getCurrentRequest()->get('article'),
@@ -58,7 +58,7 @@ public function getType() : string
 
 ### The createAdminConfigurationForm(FormBuilderInterface $builder)
 
-Sometime, your block require configuration, that means it does not just use the request context but for example have to be filtered on one category. So to build your `getVariables` you need to get some user defined configuration.
+Sometime, your block require configuration, that means it does not just use the request context but for example have to be filtered on one category. So to build your `execute` you need to get some user defined configuration.
 
 To do that, just configure the admin form with :
 
