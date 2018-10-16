@@ -92,3 +92,6 @@ The global page have all the commons block that are used on all the page (menu, 
 
 You can also directly show all elements of page object. But for title, or other if you want, we recommand you to use the `cms_render` function: this call will enable your user to save twig template inside of the page to render elements that depends of PageController context. Eg the title of the current article we will save in database `{% raw %}$page->setTitle('{{ article.title }}');{% endraw %}` and this will render the article title.
 
+## Related
+
+- [Step-by-step Guide: Setup Your website layout](/guide_layout) Step-by-Step guide starting just after the installation of the project

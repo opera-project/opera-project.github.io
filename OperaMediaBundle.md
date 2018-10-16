@@ -103,6 +103,11 @@ fos_ck_editor:
             extraPlugins: "opera_media_picker"
 ```
 
+### If your admin url is not the default one
+
+If your admin url is not `admin` but for instance `/my-secret-admin`
+You must change the `filename` parameter of the fos_ck_editor plugin config from `filename: "plugin.js"` to `filename: "plugin.js?my-secret-admin"`
+
 ### Add The Media Picker to an easy admin entity form
 
 If you have a Article Entity that have a relation to the Media class from OperaAdminBundle, you can use `Opera\MediaBundle\Form\MediaEntityType` for the media type to have the media picker instead of a simple text select

@@ -11,6 +11,21 @@ body_class: body-green
 
 The easyiest way to try playing is clone the sample project here `https://github.com/opera-project/opera-cms`
 
+```
+$ git clone git@github.com:opera-project/skeleton.git
+$ cd opera-cms
+```
+
+Comment the file `/config/routes/opera_core.yaml`
+
+Run `make init`
+
+Edit the `DATABASE_URL` in your `.env` file
+
+Run `make db`
+
+Uncomment the file `/config/routes/opera_core.yaml`
+
 add the opera pages to your routing file `config/routes.yaml`
 ```
 _opera_page:
@@ -47,16 +62,21 @@ You must edit the `DATABASE_URL` in your `.env` file
 
 ### Finish install
 
-You can now use `make init` command in your project folder. It will create the database according to your `DATABASE_URL` and load the schema and fixtures.
+You can now use `make init` and `make db` command in your project folder. It will create the database according to your `DATABASE_URL` and load the schema and fixtures.
 
-### Run Server
+## Run Server
 
 You can now start the web server:
 `./bin/console server:run`
 
 The admin will be available on [http://localhost:8000/admin](http://localhost:8000/admin){:target="_blank"} using `cedric` as username and `demo` as password.
 
-### Next steps
+## Next steps
+
+- <b>[Step-by-step Guide: Setup Your website layout](/guide_layout)</b>
+- [Doc: implement a layout](/layouts)
+- [Doc: create your own entities](/entities)
+- [Doc: create your own block](/blocks)
 
 **This skeleton contains these bundles:**
 
@@ -64,11 +84,7 @@ The admin will be available on [http://localhost:8000/admin](http://localhost:80
 - [OperaListBlockBundle](OperaListBlockBundle) (Manage block of list of content)
 - [OperaMediaBundle](OperaMediaBundle) (Manage media, upload files)
 - [OperaTaxonomyBundle](OperaTaxonomyBundle) (Manage tags)
-
-You can now:
-- [create your own entities](/entities)
-- [implement a layout](/layouts) for your website
-- [create your own block](/blocks)
+- [OperaTwigBundle](OperaTwigBundle) (Manage twig block: a text block that can use twig variables)
 
 ### Things to know
 

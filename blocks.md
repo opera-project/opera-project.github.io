@@ -120,3 +120,7 @@ public function getTemplate(Block $block)
     return sprintf('blocks/my-block/%s', $block->getConfiguration()['template']);    
 }
 ````
+
+## Related
+
+- [Doc: how make a block cachable](/cache)
