@@ -14,25 +14,39 @@ In this guide we will:
 
 - add the assets of the bootstrap template exemple to our project
 - create a base template
+- learn how to split a layout into areas that will contain blocks
 - create two layout: a single column and a two column. Each having a template and a database entry
 - see how to add [twig blocks](/OperaTwigBlockBundle) to differents area of different page in the admin
 
 
 For this guide I'm going to take an existing simple bootstrap template and convert it into opera layout.
 
-A single column page [template](https://startbootstrap.com/template-overviews/business-frontpage/){:target="_blank"}
+A single column page [layout](https://startbootstrap.com/template-overviews/business-frontpage/){:target="_blank"} :
+
 ![MediaManager](/images/guide/layout/business-frontpage.jpg)
 
-A two column page [template](https://startbootstrap.com/template-overviews/blog-post/){:target="_blank"}
+A two column page [layout](https://startbootstrap.com/template-overviews/blog-post/){:target="_blank"} :
+
 ![MediaManager](/images/guide/layout/blog-post.jpg)
 
 [Download the full zip here](/download/startbootstrap-exemple-layout.zip)
 
-## Ad the Assets
+```
+ZIPFILE/css/
+        |____business-frontpage.css                 (layout css file)
+ZIPFILE/index.html                                  (single column default layout)
+ZIPFILE/index2.html                                 (two column layout)
+ZIPFILE/vendor/
+        |____bootstrap
+             |____css
+                  |____ bootstrap
+                        |____ bootstrap.min.css     (bootstrap css file)
+```
+## Add the Assets
 
-Unzip the file and copy the `css` folder into the `assets` folder.
+Unzip the file and copy the `css/` and `vendor/bootstrap/css` folder's content into the `assets/css` folder of your project.
 
-Edit the `webpack.config.js` to comment (or remove) the versioning and add the two css files
+Edit the `/webpack.config.js` to comment (or remove) the versioning and add the two css files:
 
 ```javascript
 // .enableVersioning(Encore.isProduction())
@@ -52,7 +66,7 @@ $ npm run build
 
 The file `template/base.html.twig` is the template every page layout will extends of.
 
-We can copy the content of the `index.html` from the zip file into this `template/base.html.twig` file and **remove the unnecessary elements**: nav, header, container, and footer
+We can copy the content of the `index.html` from the zip file into this `template/base.html.twig` file and **remove the unnecessary elements**: nav, header, container, and footer. All those elements will become area and blocks in the future.
 
 Then we configure the `<title>` and `<meta>` so that it takes the title of the opera page dynamically
 ```twig
@@ -64,7 +78,7 @@ Then we configure the `<title>` and `<meta>` so that it takes the title of the o
 {% endraw %}
 ```
 
-We add three twig block `{% raw %}{% block %}{% endraw %}`: `stylesheet` `body` and `javascript` so that the layout extending this `base.html.twig` can add stuff.
+We add three twig block `{% raw %}{% block %}{% endraw %}`: `stylesheet` `body` and `javascript` so that the layout extending this `base.html.twig` can add its code.
 
 We add the css files:
 ```twig
@@ -107,18 +121,36 @@ The `template/base.html.twig` should look like this:
 
 ````
 
-### Creating the single column template layout
+### First layout: single column default layout
 
-![MediaManager](/images/guide/layout/business-frontpage.jpg)
+#### Splitting the first layout into area
+
+If we take our first layout:
+
+![MediaManager](/images/guide/layout/business_page.png)
+
+We can divide the layout into different area `header`, `body`, `footer`:
+
+![MediaManager](/images/guide/layout/business_page_area.png)
+
+With each area having various blocks:
+
+![MediaManager](/images/guide/layout/business_page_block.png)
+
+1 block in the header, another one in the footer, and 3 different block in the body.
+
+#### Creating the single column template layout
+
+![MediaManager](/images/guide/layout/business_page_area.png)
 
 If we look at the bootstrap template `index.html` file, there is just a `<div class="container">` containing multiples row.
 This single column template will be our default template.
-This template has 2 `area`: a **header**, a **body**.
+This template has 3 `area`: a **header**, a **body** and a **footer**.
 
-We can create a simple `template/layout/default.html.twig` file extending the `base.html.twig` and redefining the block body.
+We can create a file `template/layout/default.html.twig` extending the `base.html.twig` and redefining the `{% raw %}{% block body %}{% endraw %}`.
 (file `template/layout/default.html.twig` already exist in skeleton. Update it.)
 
-[More information on the cms_area](/layouts)
+[More information on the cms_area and what is the **_global** page](/layouts)
 
 ```twig
 {% raw %}
@@ -132,6 +164,8 @@ We can create a simple `template/layout/default.html.twig` file extending the `b
         <!-- will add here the opera block of this page of the area 'body' -->
         {{ cms_area('body', _opera_page) }}
     </div>
+    {{ cms_area('footer'), _opera_page }}
+    {{ cms_area('footer') }}
 {% endblock %}
 {% endraw %}
 ```
@@ -142,30 +176,62 @@ Add an entry to your Layout fixture `src/DataFixtures/LayoutFixtures.php`
 
 ```php
 // src/DataFixtures/LayoutFixtures.php
-const LAYOUT_DEFAULT = 'LAYOUT_DEFAULT';
 
-$layout = new Layout();
-$layout->setName('default'); // name of the .html.twig
-$layout->setConfiguration([
-    'areas' => [ // names of the differents area of this template layout
-        'H' => 'header',
-        'B' => 'body',
-    ],
-    'layout' => [ // visual representation of the layout
-        'H H H H',
-        'B B B B',
-        'B B B B',
-    ]
-]);
-$manager->persist($layout);
-$this->addReference(self::LAYOUT_DEFAULT, $layout);
+class LayoutFixtures extends Fixture
+{
+    const LAYOUT_DEFAULT = 'LAYOUT_DEFAULT';
 
-$manager->flush();
+    public function load(ObjectManager $manager)
+    {
+        $layout = new Layout();
+        $layout->setName('default'); // name of the .html.twig
+        $layout->setConfiguration([
+            'areas' => [ // names of the differents area of this template layout
+                'H' => 'header',
+                'B' => 'body',
+                'F' => 'footer',
+            ],
+            'layout' => [ // visual representation of the layout
+                'H H H H',
+                'B B B B',
+                'B B B B',
+                'F F F F',
+            ]
+        ]);
+        $manager->persist($layout);
+        $this->addReference(self::LAYOUT_DEFAULT, $layout);
+
+        $manager->flush();
+    }
 ```
+### Second layout: two columns layout
 
-### Creating the two column template layout
+#### Splitting the second layout into area
 
-![MediaManager](/images/guide/layout/blog-post.jpg)
+If we take our second layout:
+
+![MediaManager](/images/guide/layout/post_page.png)
+
+We can divide the layout into four different area `header`, `body`, `sidebar`, `footer`:
+
+![MediaManager](/images/guide/layout/post_page_area.png)
+
+With each area having various blocks:
+
+![MediaManager](/images/guide/layout/post_page_block.png)
+
+1 block in the header, another one in the footer, 3 in the sidebar and 1 in the body.
+
+You can define the blocks as you wish. For instance the post block in the body could be splitted into 2 block one the content of the post and one for the users' comments.
+
+Exemple alternate block split:
+
+![MediaManager](/images/guide/layout/post_page_block_alt.png)
+
+
+#### Creating the two column template layout
+
+![MediaManager](/images/guide/layout/post_page_area.png)
 
 If we look at the bootstrap template `index2.html` file, there is just a `<div class="container">` containing one row with two column.
 We can create a `template/layout/two-columns.html.twig` file. It look a lot like the default.html.twig with an **header** and **body** area but with one extra area: **sidebar**
@@ -222,10 +288,10 @@ $manager->flush();
 You can create your home page that will use the default layout and a exemple page that will use the two columns
 
 ```php
-
-
-
 // src/DataFixtures/PageFixtures.php
+const PAGE_HOME = 'PAGE_HOME';
+const PAGE_POST = 'PAGE_POST';
+
 $page = new Page();
 $page->setTitle('Hello home sweet home');
 $page->setSlug('');
@@ -234,12 +300,12 @@ $page->setLayout($this->getReference(LayoutFixtures::LAYOUT_DEFAULT));
 $this->addReference(self::PAGE_HOME, $page);
 $manager->persist($page);
 
-// src/DataFixtures/PageFixtures.php
 $page = new Page();
 $page->setTitle('My two column page here');
 $page->setSlug('exemple-page');
 $page->setStatus('published');
 $page->setLayout($this->getReference(LayoutFixtures::LAYOUT_TWO_COL));
+$this->addReference(self::PAGE_POST, $page);
 $manager->persist($page);
 ```
 
@@ -254,8 +320,8 @@ Of course. We need to add our famous opera blocks ;)
 
 ## Add some block in the admin
 
-For this guide. We will only use the `twig` block ([see documentation](/OperaTwigBlockBundle)). It allows to add the content of your code directly in the block.
-In the admin you can edit the blocks of a page by clicking "Layout".
+For this part of the guide. We will not code new block but use `twig` type block ([see documentation](/OperaTwigBlockBundle)). It allows to add the content of your code directly in the block.
+In the admin  [http://localhost:8000/admin](http://localhost:8000/admin){:target="_blank"} using `cedric` as username and `demo` as password you can edit a page layout to add blocks.
 
 ### Blocks for a specific page
 
@@ -283,7 +349,7 @@ Repeat the process on all the area and pages as needed.
 
 In your admin you will have a page named `_global` that`s a special page that have all the **common blocks** that are used on all the page (menu, footer...) so you don't have to configure them on all the pages.
 
-Add your common items on this page. They will appear on all your pages.
+Add your common items on this page. (that would be a nav menu block in the `header` area, and a copyright block in the `footer`, area) They will be available on all your pages.
 
 Here, your pages are no longer blank \o/.
 

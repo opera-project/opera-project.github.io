@@ -95,3 +95,4 @@ You can also directly show all elements of page object. But for title, or other 
 ## Related
 
 - [Step-by-step Guide: Setup Your website layout](/guide_layout) Step-by-Step guide starting just after the installation of the project
+- [How to split a layout into different areas](/guide_layout#first-layout-single-column-default-layout) 
