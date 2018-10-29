@@ -84,7 +84,7 @@ The admin will be available on [http://localhost:8000/admin](http://localhost:80
 - [OperaListBlockBundle](OperaListBlockBundle) (Manage block of list of content)
 - [OperaMediaBundle](OperaMediaBundle) (Manage media, upload files)
 - [OperaTaxonomyBundle](OperaTaxonomyBundle) (Manage tags)
-- [OperaTwigBundle](OperaTwigBundle) (Manage twig block: a text block that can use twig variables)
+- [OperaTwigBlockBundle](OperaTwigBlockBundle) (Manage twig block: a text block that can use twig variables)
 
 ### Things to know
 
