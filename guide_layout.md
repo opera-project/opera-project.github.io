@@ -164,7 +164,7 @@ We can create a file `template/layout/default.html.twig` extending the `base.htm
         <!-- will add here the opera block of this page of the area 'body' -->
         {{ cms_area('body', _opera_page) }}
     </div>
-    {{ cms_area('footer'), _opera_page }}
+    {{ cms_area('footer', _opera_page) }}
     {{ cms_area('footer') }}
 {% endblock %}
 {% endraw %}
