@@ -26,6 +26,7 @@ Presently, the `ContentList` Block configuration can configure thoses parameters
 - `order` : which order to display the listable entities
 - `limit` : how many entities to display
 - `tags` : filter by taxonomy (See [OperaTaxonomyBundle](OperaTaxonomyBundle))
+- `filters` : add more filter settings to use in an EntityRepository (json accepted)
 
 ## How to make an entity listable
 
